@@ -15,7 +15,7 @@ ACM CHI Conference on Human Factors in Computing Systems, 2021
 
 [Paper](https://yuejiang-nj.github.io/Publications/2021CHI_ReverseORC/paper.pdf) ·
 [Video](https://www.youtube.com/watch?v=uBVRtUvLFSk) ·
-[BibTeX](https://dl.acm.org/action/exportCiteProcCitation?doi=10.1145%2F3411764.3445043&format=bibTex)
+[BibTeX](citations/reverseorc.bib)
 
 ## Related publications
 
@@ -30,7 +30,7 @@ ACM CHI Conference on Human Factors in Computing Systems, 2020
 
 [Paper](https://yuejiang-nj.github.io/Publications/2020CHI_ORCSolver/paper.pdf) ·
 [Video](https://www.youtube.com/watch?v=5SAZ8iDKFhc) ·
-[BibTeX](https://dl.acm.org/action/exportCiteProcCitation?doi=10.1145%2F3313831.3376610&format=bibTex)
+[BibTeX](citations/orcsolver.bib)
 
 ### ORC Layout: Adaptive GUI Layout with OR-Constraints
 
@@ -43,7 +43,7 @@ ACM CHI Conference on Human Factors in Computing Systems, 2019
 
 [Paper](https://yuejiang-nj.github.io/Publications/2019CHI_ORCLayout/paper.pdf) ·
 [Video](https://www.youtube.com/watch?v=eiEmLTfPDZQ) ·
-[BibTeX](https://dl.acm.org/action/exportCiteProcCitation?doi=10.1145%2F3290605.3300643&format=bibTex)
+[BibTeX](citations/orc-layout.bib)
 
 The repository is organized into four directories:
 
