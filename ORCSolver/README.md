@@ -1,8 +1,7 @@
-# Original ORC Solver
+# Original ORCSolver
 
 This directory contains the original, non-hierarchical ReverseORC solver and
-its runnable examples. `ORCSolver`, `ReverseORCSolver`, and `images` are sibling
-directories.
+its runnable examples.
 
 ## Contents
 
@@ -19,12 +18,21 @@ directories.
 
 ## Requirements
 
-The examples use Python, Tkinter, Pillow, CVXPY, and NumPy. Image paths are
-anchored to the `ORCSolver` directory at runtime, so examples may be launched
-from any working directory:
+The examples use Python 3, Tkinter, Pillow, CVXPY, and NumPy. From the
+repository root, install the Python packages with:
+
+```bash
+python -m pip install pillow cvxpy numpy
+```
+
+Tkinter is supplied separately by some Python and operating-system package
+managers. You can check it with `python -m tkinter`.
+
+Image paths are anchored to the `ORCSolver` directory at runtime, so examples
+may be launched from any working directory:
 
 ```text
-2021_ORC/
+ReverseORC_CHI2021/
 ├── images/
 ├── ORCSolver/
 └── ReverseORCSolver/
@@ -32,16 +40,16 @@ from any working directory:
 
 ## Running the examples
 
-From the sibling `ReverseORCSolver` directory:
+From the repository root:
 
 ```bash
-python ../ORCSolver/teaser_example.py 640 480
-python ../ORCSolver/video_example.py 400 640
-python ../ORCSolver/simple_flow_pattern.py 640 320
-python ../ORCSolver/connected_flow_pattern.py 640 240
-python ../ORCSolver/optional_widgets_pattern.py 800 800
-python ../ORCSolver/balanced_flow_pattern.py 240 500
-python ../ORCSolver/flow_around_pattern.py 600 600
+python ORCSolver/teaser_example.py 640 480
+python ORCSolver/video_example.py 400 640
+python ORCSolver/simple_flow_pattern.py 640 320
+python ORCSolver/connected_flow_pattern.py 640 240
+python ORCSolver/optional_widgets_pattern.py 800 800
+python ORCSolver/balanced_flow_pattern.py 240 500
+python ORCSolver/flow_around_pattern.py 600 600
 ```
 
 The two positional arguments are the requested window width and height. If
@@ -56,14 +64,14 @@ Use `--headless` to open no windows and print solving time, loss, and result
 variables:
 
 ```bash
-python ../ORCSolver/video_example.py 890 365 --headless
+python ORCSolver/video_example.py 890 365 --headless
 ```
 
 Use `--time-only` to open no windows and print one numeric line containing only
 the solver time in seconds:
 
 ```bash
-python ../ORCSolver/video_example.py 890 365 --time-only
+python ORCSolver/video_example.py 890 365 --time-only
 ```
 
 `--headless` and `--time-only` are mutually exclusive.
@@ -95,7 +103,7 @@ from ORCSolver.orclayout_classes import Pivot
 From the repository root, run:
 
 ```bash
-python -m unittest discover -v
+python -m unittest discover -s ORCSolver -v
 ```
 
 The legacy CLI tests verify custom window sizes, headless output, and

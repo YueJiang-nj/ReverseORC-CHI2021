@@ -2,19 +2,27 @@
 
 This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
-The project is organized as three sibling directories:
+The repository is organized into three directories:
 
 ```text
-2021_ORC/
+ReverseORC_CHI2021/
 ├── images/
 ├── ORCSolver/          # Original non-hierarchical solver (ORCSolver)
-└── ReverseORCSolver/   # New hierarchical solver 
+└── ReverseORCSolver/   # New hierarchical solver
 ```
 
 ## Requirements
 
-The examples use Python, Tkinter, Pillow, CVXPY, and NumPy. Image assets are
-loaded from the `images` directory:
+The examples use Python 3, Tkinter, Pillow, CVXPY, and NumPy. Install the
+Python packages with:
+
+```bash
+python -m pip install pillow cvxpy numpy
+```
+
+Tkinter is included with many Python distributions. Test it with
+`python -m tkinter`; if that fails, install Tk support through your Python or
+operating-system package manager. Image assets are loaded from `images/`:
 
 ```text
 ReverseORC_CHI2021/
@@ -25,16 +33,16 @@ ReverseORC_CHI2021/
 
 ## Hierarchical examples
 
-In the ReverseORCSolver folder, you can run our examples:
+From the repository root, run the hierarchical examples with:
 
 ```bash
-python hierarchical_teaser_example.py
-python hierarchical_video_example.py
-python hierarchical_simple_flow_pattern.py
-python hierarchical_connected_flow_pattern.py
-python hierarchical_optional_widgets_pattern.py
-python hierarchical_balanced_flow_pattern.py
-python hierarchical_flow_around_pattern.py
+python ReverseORCSolver/hierarchical_teaser_example.py
+python ReverseORCSolver/hierarchical_video_example.py
+python ReverseORCSolver/hierarchical_simple_flow_pattern.py
+python ReverseORCSolver/hierarchical_connected_flow_pattern.py
+python ReverseORCSolver/hierarchical_optional_widgets_pattern.py
+python ReverseORCSolver/hierarchical_balanced_flow_pattern.py
+python ReverseORCSolver/hierarchical_flow_around_pattern.py
 ```
 
 
@@ -43,8 +51,8 @@ python hierarchical_flow_around_pattern.py
 Pass the width and height as positional arguments:
 
 ```bash
-python hierarchical_teaser_example.py 1046 760
-python hierarchical_video_example.py 400 640
+python ReverseORCSolver/hierarchical_teaser_example.py 1046 760
+python ReverseORCSolver/hierarchical_video_example.py 400 640
 ```
 
 If dimensions are omitted, each example uses its original default size. The
@@ -56,7 +64,7 @@ Use `--headless` to skip the GUI and print the solving time and every resulting
 group/widget box:
 
 ```bash
-python hierarchical_teaser_example.py 1046 760 --headless
+python ReverseORCSolver/hierarchical_teaser_example.py 1046 760 --headless
 ```
 
 Example output:
@@ -77,7 +85,7 @@ Use `--time-only` for benchmarking. It opens no window and prints one numeric
 line containing only the solver time in seconds:
 
 ```bash
-python hierarchical_teaser_example.py 1046 760 --time-only
+python ReverseORCSolver/hierarchical_teaser_example.py 1046 760 --time-only
 ```
 
 Example output:
@@ -95,32 +103,32 @@ The original runnable examples support the same positional size arguments and
 output modes:
 
 ```bash
-python ../ORCSolver/teaser_example.py 640 480
-python ../ORCSolver/video_example.py 400 640
-python ../ORCSolver/simple_flow_pattern.py 640 320
-python ../ORCSolver/connected_flow_pattern.py 640 240
-python ../ORCSolver/optional_widgets_pattern.py 800 800
-python ../ORCSolver/balanced_flow_pattern.py 240 500
-python ../ORCSolver/flow_around_pattern.py 600 600
+python ORCSolver/teaser_example.py 640 480
+python ORCSolver/video_example.py 400 640
+python ORCSolver/simple_flow_pattern.py 640 320
+python ORCSolver/connected_flow_pattern.py 640 240
+python ORCSolver/optional_widgets_pattern.py 800 800
+python ORCSolver/balanced_flow_pattern.py 240 500
+python ORCSolver/flow_around_pattern.py 600 600
 ```
 
 Run an original example without Tk windows and print its time and result:
 
 ```bash
-python ../ORCSolver/video_example.py 890 365 --headless
+python ORCSolver/video_example.py 890 365 --headless
 ```
 
 Print only its solver time as one numeric line:
 
 ```bash
-python ../ORCSolver/video_example.py 890 365 --time-only
+python ORCSolver/video_example.py 890 365 --time-only
 ```
 
 These options apply to runnable example and pattern files. The original solver
-is isolated in the sibling `../ORCSolver/` directory. Library modules such as
-`../ORCSolver/flow_solver.py`, `../ORCSolver/orclayout_classes.py`,
-`hierarchical_solver.py`, and `../ORCSolver/legacy_cli.py` are imported APIs
-and therefore do not expose example CLI options.
+is isolated in the `ORCSolver/` directory. Library modules such as
+`ORCSolver/flow_solver.py`, `ORCSolver/orclayout_classes.py`,
+`ReverseORCSolver/hierarchical_solver.py`, and `ORCSolver/legacy_cli.py` are
+imported APIs and therefore do not expose example CLI options.
 
 ## Timing definition
 
@@ -138,6 +146,12 @@ solver time is the sum of those solver calls; construction and selection of the
 winning candidate remain excluded.
 
 ## Using the hierarchical solver directly
+
+Run this example from the `ReverseORCSolver` directory:
+
+```bash
+cd ReverseORCSolver
+```
 
 ```python
 from hierarchical_solver import Group, HierarchicalSolver, Size, Widget
@@ -176,10 +190,11 @@ hierarchical_widget = Widget.from_orc_widget(existing_orc_widget)
 
 ## Tests
 
-Run the complete test suite with:
+From the repository root, run both test suites with:
 
 ```bash
-python -m unittest discover -v
+python -m unittest discover -s ORCSolver -v
+python -m unittest discover -s ReverseORCSolver -v
 ```
 
 The tests cover hierarchical containment, weighted allocation, flow wrapping,
@@ -188,4 +203,4 @@ corresponding-element size equality, image availability, custom window sizes,
 and time-only output.
 
 More implementation details are available in
-[`HIERARCHICAL_SOLVER.md`](HIERARCHICAL_SOLVER.md).
+[`HIERARCHICAL_SOLVER.md`](ReverseORCSolver/HIERARCHICAL_SOLVER.md).

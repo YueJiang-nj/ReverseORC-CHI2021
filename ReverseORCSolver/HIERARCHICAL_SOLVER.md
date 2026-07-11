@@ -62,7 +62,8 @@ groups' outer boxes.
 ## Visual examples
 
 The hierarchical counterparts of every original example open a Tkinter window
-and automatically re-solve when it is resized:
+and automatically re-solve when it is resized. Run these commands from the
+`ReverseORCSolver` directory:
 
 ```shell
 python hierarchical_teaser_example.py
@@ -72,6 +73,23 @@ python hierarchical_connected_flow_pattern.py
 python hierarchical_optional_widgets_pattern.py
 python hierarchical_balanced_flow_pattern.py
 python hierarchical_flow_around_pattern.py
+```
+
+Each launcher also accepts optional width and height arguments. Use
+`--headless` to print the layout without opening windows, or `--time-only` to
+print only the solver time:
+
+```shell
+python hierarchical_teaser_example.py 1046 760 --headless
+python hierarchical_teaser_example.py 1046 760 --time-only
+```
+
+## Tests
+
+From the repository root, run the hierarchical tests with:
+
+```shell
+python -m unittest discover -s ReverseORCSolver -v
 ```
 
 The shared implementation is in `hierarchical_patterns.py`. Each example uses
