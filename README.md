@@ -6,20 +6,29 @@ This repository contains the hierarchical ReverseORC GUI layout solver for DOM-l
 Paper:
 
 ReverseORC: Reverse Engineering of Resizable User Interface Layouts with OR-Constraints
+
 Yue Jiang, Wolfgang Stuerzlinger, Christof Lutteroth
+
 Paper: https://yuejiang-nj.github.io/Publications/2021CHI_ReverseORC/paper.pdf
+
 Video: https://www.youtube.com/watch?v=uBVRtUvLFSk
+
 
 Related Papers: 
 
 ORCSolver: An Efficient Solver for Adaptive GUI Layout with OR-Constraints
+
 Yue Jiang, Wolfgang Stuerzlinger, Matthias Zwicker, Christof Lutteroth
 Paper: https://yuejiang-nj.github.io/Publications/2020CHI_ORCSolver/paper.pdf
+
 Video: https://www.youtube.com/watch?v=5SAZ8iDKFhc
 
 ORC Layout: Adaptive GUI Layout with OR-Constraints
+
 Yue Jiang, Ruofei Du, Christof Lutteroth, Wolfgang Stuerzlinger
+
 Paper: https://yuejiang-nj.github.io/Publications/2019CHI_ORCLayout/paper.pdf
+
 Video: https://www.youtube.com/watch?v=eiEmLTfPDZQ&feature=youtu.be
 
 
