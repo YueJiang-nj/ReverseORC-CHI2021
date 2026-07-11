@@ -342,17 +342,12 @@ class PatternWindow:
                 if name != "canvas":
                     self.canvas.create_rectangle(box.left, box.top, box.right, box.bottom,
                                                  outline="#57606f", dash=(3, 2))
-                    self.canvas.create_text(box.left + 3, box.top + 3, text=name,
-                                            anchor="nw", fill="#2f3542", font=("TkDefaultFont", 8))
                 continue
             self.canvas.create_rectangle(box.left + 1, box.top + 1, box.right - 1, box.bottom - 1,
                                          fill="#ffffff", outline="#2f3542")
             asset = pattern_asset(self.scenario, name)
             if asset is not None:
                 self._draw_image(name, box, asset)
-            elif box.width > 28 and box.height > 18:
-                self.canvas.create_text(box.left + box.width / 2, box.top + box.height / 2,
-                                        text=name, width=max(20, box.width - 6), font=("TkDefaultFont", 8))
         if self.scenario == "teaser" and "email_row" in result.boxes:
             row = result.boxes["email_row"]
             self.canvas.create_line(row.left, row.top, row.right, row.top,
@@ -365,7 +360,7 @@ class PatternWindow:
         path = IMAGE_DIRECTORY / filename
         if not path.is_file():
             self.canvas.create_text(box.left + box.width / 2, box.top + box.height / 2,
-                                    text=name + "\n(missing " + filename + ")", justify="center")
+                                    text="Missing image: " + filename, justify="center")
             return
         if path not in self._source_images:
             with Image.open(path) as image:
