@@ -1,8 +1,8 @@
 # Original ORC Solver
 
 This directory contains the original, non-hierarchical ReverseORC solver and
-its runnable examples. The hierarchical solver and its examples are kept at
-the repository root.
+its runnable examples. `ORCSolver`, `ReverseORCSolver`, and `images` are sibling
+directories.
 
 ## Contents
 
@@ -19,29 +19,29 @@ the repository root.
 
 ## Requirements
 
-The examples use Python, Tkinter, Pillow, CVXPY, and NumPy. Run the examples
-from the repository root so the existing `../images` asset paths resolve to the
-sibling `images` directory:
+The examples use Python, Tkinter, Pillow, CVXPY, and NumPy. Image paths are
+anchored to the `ORCSolver` directory at runtime, so examples may be launched
+from any working directory:
 
 ```text
-parent-directory/
+2021_ORC/
 ├── images/
+├── ORCSolver/
 └── ReverseORCSolver/
-    └── ORCSolver/
 ```
 
 ## Running the examples
 
-From the `ReverseORCSolver` repository root:
+From the sibling `ReverseORCSolver` directory:
 
 ```bash
-python ORCSolver/teaser_example.py 640 480
-python ORCSolver/video_example.py 400 640
-python ORCSolver/simple_flow_pattern.py 640 320
-python ORCSolver/connected_flow_pattern.py 640 240
-python ORCSolver/optional_widgets_pattern.py 800 800
-python ORCSolver/balanced_flow_pattern.py 240 500
-python ORCSolver/flow_around_pattern.py 600 600
+python ../ORCSolver/teaser_example.py 640 480
+python ../ORCSolver/video_example.py 400 640
+python ../ORCSolver/simple_flow_pattern.py 640 320
+python ../ORCSolver/connected_flow_pattern.py 640 240
+python ../ORCSolver/optional_widgets_pattern.py 800 800
+python ../ORCSolver/balanced_flow_pattern.py 240 500
+python ../ORCSolver/flow_around_pattern.py 600 600
 ```
 
 The two positional arguments are the requested window width and height. If
@@ -56,14 +56,14 @@ Use `--headless` to open no windows and print solving time, loss, and result
 variables:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --headless
+python ../ORCSolver/video_example.py 890 365 --headless
 ```
 
 Use `--time-only` to open no windows and print one numeric line containing only
 the solver time in seconds:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --time-only
+python ../ORCSolver/video_example.py 890 365 --time-only
 ```
 
 `--headless` and `--time-only` are mutually exclusive.

@@ -1,0 +1,4 @@
+from hierarchical_patterns import run_cli
+
+if __name__ == "__main__":
+    run_cli("simple_flow")

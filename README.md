@@ -2,20 +2,30 @@
 
 This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
+The project is organized as three sibling directories:
+
+```text
+2021_ORC/
+├── images/
+├── ORCSolver/          # Original non-hierarchical solver (ORCSolver)
+└── ReverseORCSolver/   # New hierarchical solver 
+```
+
 ## Requirements
 
 The examples use Python, Tkinter, Pillow, CVXPY, and NumPy. Image assets are
 loaded from the `images` directory:
 
 ```text
-parent-directory/
+ReverseORC_CHI2021/
 ├── images/
+├── ORCSolver/
 └── ReverseORCSolver/
 ```
 
 ## Hierarchical examples
 
-Each original visual example has a hierarchical counterpart:
+In the ReverseORCSolver folder, you can run our examples:
 
 ```bash
 python hierarchical_teaser_example.py
@@ -85,32 +95,32 @@ The original runnable examples support the same positional size arguments and
 output modes:
 
 ```bash
-python ORCSolver/teaser_example.py 640 480
-python ORCSolver/video_example.py 400 640
-python ORCSolver/simple_flow_pattern.py 640 320
-python ORCSolver/connected_flow_pattern.py 640 240
-python ORCSolver/optional_widgets_pattern.py 800 800
-python ORCSolver/balanced_flow_pattern.py 240 500
-python ORCSolver/flow_around_pattern.py 600 600
+python ../ORCSolver/teaser_example.py 640 480
+python ../ORCSolver/video_example.py 400 640
+python ../ORCSolver/simple_flow_pattern.py 640 320
+python ../ORCSolver/connected_flow_pattern.py 640 240
+python ../ORCSolver/optional_widgets_pattern.py 800 800
+python ../ORCSolver/balanced_flow_pattern.py 240 500
+python ../ORCSolver/flow_around_pattern.py 600 600
 ```
 
 Run an original example without Tk windows and print its time and result:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --headless
+python ../ORCSolver/video_example.py 890 365 --headless
 ```
 
 Print only its solver time as one numeric line:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --time-only
+python ../ORCSolver/video_example.py 890 365 --time-only
 ```
 
 These options apply to runnable example and pattern files. The original solver
-is isolated in `ORCSolver/`. Library modules such as
-`ORCSolver/flow_solver.py`, `ORCSolver/orclayout_classes.py`,
-`hierarchical_solver.py`, and `ORCSolver/legacy_cli.py` are imported APIs and
-therefore do not expose example CLI options.
+is isolated in the sibling `../ORCSolver/` directory. Library modules such as
+`../ORCSolver/flow_solver.py`, `../ORCSolver/orclayout_classes.py`,
+`hierarchical_solver.py`, and `../ORCSolver/legacy_cli.py` are imported APIs
+and therefore do not expose example CLI options.
 
 ## Timing definition
 

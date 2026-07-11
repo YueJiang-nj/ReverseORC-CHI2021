@@ -1,7 +1,9 @@
 """Shared command-line options for the original (non-hierarchical) demos."""
 
 import argparse
+import os
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass
@@ -41,5 +43,9 @@ def configure(default_width, default_height, default_show=True):
     args = parser.parse_args()
     if args.width <= 0 or args.height <= 0:
         parser.error("width and height must be positive")
+    # Original examples use ../images paths. Anchor them to this script folder
+    # so GUI assets work whether launched from ORCSolver, ReverseORCSolver, or
+    # their common parent.
+    os.chdir(Path(__file__).resolve().parent)
     return LegacyOptions(args.width, args.height, args.headless, args.time_only,
                          bool(default_show) and not (args.headless or args.time_only))
