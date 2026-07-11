@@ -13,7 +13,7 @@ The Python API mirrors the existing hierarchical solver: `Size`, `Widget`,
 
 Requirements:
 
-- Python 3 with development headers
+- Python 3
 - a C++17 compiler
 - setuptools
 - Pillow and Tkinter for the visual examples
