@@ -1,4 +1,4 @@
-from hierarchical_patterns import run
+from hierarchical_patterns import run_cli
 
 if __name__ == "__main__":
-    run("balanced_flow")
+    run_cli("balanced_flow")

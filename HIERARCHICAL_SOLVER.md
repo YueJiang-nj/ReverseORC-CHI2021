@@ -74,6 +74,7 @@ python hierarchical_balanced_flow_pattern.py
 python hierarchical_flow_around_pattern.py
 ```
 
-The shared implementation is in `hierarchical_patterns.py`. Each window draws
-group boundaries, widget boxes, and a status line containing solve time, number
-of local group solves, and hierarchy depth.
+The shared implementation is in `hierarchical_patterns.py`. Each example uses
+the same Tkinter structure as the teaser: a resizable `Canvas Layout` window
+rendered with Pillow/ImageTk and a separate `Time` window reporting solver-only
+time.

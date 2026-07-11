@@ -61,6 +61,9 @@ class Group:
     direction: str = "row"
     gap: float = 0.0
     weight: float = 1.0
+    fill: bool = False
+    uniform: bool = False
+    balanced: bool = False
 
     def __post_init__(self):
         valid = {"row", "column", "horizontal_flow", "vertical_flow"}
@@ -266,8 +269,8 @@ class HierarchicalSolver:
             extra = group.gap if current else 0.0
             # Prefer wrapping before distortion, but never make a line whose
             # minimum cannot fit. This is the important quality/safety guard.
-            if current and (used_pref + extra + size.preferred > capacity or
-                            used_min + extra + size.minimum > capacity):
+            if current and (used_pref + extra + size.preferred > capacity + 1e-8 or
+                            used_min + extra + size.minimum > capacity + 1e-8):
                 lines.append(current)
                 current, used_min, used_pref, extra = [], 0.0, 0.0, 0.0
             if size.minimum > capacity + 1e-8:
@@ -277,6 +280,17 @@ class HierarchicalSolver:
             used_pref += extra + size.preferred
         if current:
             lines.append(current)
+        if group.balanced and len(lines) > 1:
+            # Keep ordered flows but distribute peers evenly between lines.
+            count = len(group.children)
+            line_count = len(lines)
+            base, extra = divmod(count, line_count)
+            balanced_lines, start = [], 0
+            for index in range(line_count):
+                length = base + (1 if index < extra else 0)
+                balanced_lines.append(group.children[start:start + length])
+                start += length
+            lines = balanced_lines
         return lines
 
     def _place_flow(self, group: Group, box: Box, result: LayoutResult, depth: int):
@@ -289,14 +303,27 @@ class HierarchicalSolver:
             line_cross_sizes.append(_max_size(s[1 if horizontal else 0] for s in measured))
         cross_capacity = (box.height if horizontal else box.width) - group.gap * (len(lines) - 1)
         line_extents = _allocate(line_cross_sizes, [1.0] * len(lines), cross_capacity)
+        if group.uniform:
+            uniform_cross = min(line_extents)
+            line_extents = [uniform_cross] * len(lines)
 
         cross_cursor = box.top if horizontal else box.left
+        uniform_primary = None
+        if group.uniform:
+            largest_line = max(len(line) for line in lines)
+            uniform_primary = (capacity - group.gap * (largest_line - 1)) / largest_line
         for line, cross_extent in zip(lines, line_extents):
             measured = [intrinsic(child) for child in line]
             primary_sizes = [s[0 if horizontal else 1] for s in measured]
             primary_capacity = capacity - group.gap * (len(line) - 1)
-            lengths = _allocate(primary_sizes, [child.weight for child in line],
-                                primary_capacity, fill=False)
+            if uniform_primary is None:
+                lengths = _allocate(primary_sizes, [child.weight for child in line],
+                                    primary_capacity, fill=group.fill)
+            else:
+                lower = max(size.minimum for size in primary_sizes)
+                upper = min(size.maximum for size in primary_sizes)
+                common = min(upper, max(lower, uniform_primary))
+                lengths = [common] * len(line)
             cursor = box.left if horizontal else box.top
             for child, length in zip(line, lengths):
                 child_box = (Box(cursor, cross_cursor, length, cross_extent) if horizontal else

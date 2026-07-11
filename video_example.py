@@ -37,8 +37,7 @@ num_left = 6
 # window size
 window_width = 400
 window_height = 640
-#window_width = 640
-#window_height = 240
+
 
 # create the window
 if show_window:
