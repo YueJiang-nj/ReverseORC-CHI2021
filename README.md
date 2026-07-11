@@ -1,4 +1,4 @@
-# ReverseORC-CHI2021
+# ReverseORC (CHI2021)
 
 This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
