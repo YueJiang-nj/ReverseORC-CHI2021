@@ -76,15 +76,7 @@ python -m pip install pillow cvxpy numpy
 
 Tkinter is included with many Python distributions. Test it with
 `python -m tkinter`; if that fails, install Tk support through your Python or
-operating-system package manager. Image assets are loaded from `images/`:
-
-```text
-ReverseORC_CHI2021/
-├── images/
-├── ORCSolver/
-├── ReverseORCSolver/
-└── ReverseORCSolver_C++/
-```
+operating-system package manager. Image assets are loaded from `images/`.
 
 ## Hierarchical examples
 
