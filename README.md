@@ -2,6 +2,14 @@
 
 This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
+## Sample results
+
+The layout automatically adapts its structure and widget sizes to the
+available window dimensions.
+
+| Result 1 | Result 2 | Result 3 |
+|:---:|:---:|:---:|
+| ![ReverseORC sample result 1](images/result1.png) | ![ReverseORC sample result 2](images/result2.png) | ![ReverseORC sample result 3](images/result3.png) |
 
 ## Publication
 

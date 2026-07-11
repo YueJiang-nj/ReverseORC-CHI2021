@@ -275,10 +275,10 @@ def teaser_asset(name):
         "CHI2020": ("CHI2020.png", (305, 225)),
         "CHI2019": ("CHI2019.png", (305, 225)),
         "message": ("message_new.png", (165, 60)),
-        "blank1": ("blank.png", (140, 60)),
+        "blank1": ("blank.png", (None, 60)),
         "send": ("send_new.png", (100, 43)),
         "email": ("email_new.png", (150, 50)),
-        "blank2": ("blank.png", (140, 60)),
+        "blank2": ("blank.png", (None, 60)),
         "clear": ("clear_new.png", (100, 43)),
     }.get(name)
 
@@ -291,7 +291,7 @@ class PatternWindow:
         height = default_height if height is None else height
         self.root = tk.Tk()
         self.root.title("Canvas Layout")
-        self.canvas = tk.Canvas(self.root, background="#ffffff", highlightthickness=0)
+        self.canvas = tk.Canvas(self.root, background="gray85", highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
         # Every pattern follows the original teaser UI: an exact-size canvas
         # plus a separate timing window. Toplevel keeps both windows in the
@@ -361,13 +361,22 @@ class PatternWindow:
         if path not in self._source_images:
             with Image.open(path) as image:
                 self._source_images[path] = image.convert("RGBA")
+        source = self._source_images[path]
         if original_size is None:
             width = max(1, round(box.width) - 4)
             height = max(1, round(box.height) - 4)
+        elif None not in original_size:
+            max_width = max(1, min(round(box.width), original_size[0]))
+            max_height = max(1, min(round(box.height), original_size[1]))
+            scale = min(max_width / source.width, max_height / source.height)
+            width = max(1, round(source.width * scale))
+            height = max(1, round(source.height * scale))
         else:
-            width = max(1, min(round(box.width), original_size[0]))
-            height = max(1, min(round(box.height), original_size[1]))
-        resized = self._source_images[path].resize((width, height), Image.Resampling.LANCZOS)
+            width = (max(1, round(box.width) - 4) if original_size[0] is None else
+                     max(1, min(round(box.width), original_size[0])))
+            height = (max(1, round(box.height) - 4) if original_size[1] is None else
+                      max(1, min(round(box.height), original_size[1])))
+        resized = source.resize((width, height), Image.Resampling.LANCZOS)
         photo = ImageTk.PhotoImage(resized)
         self._tk_images.append(photo)  # Tk does not retain image references.
         self.canvas.create_image(box.left + box.width / 2, box.top + box.height / 2,
