@@ -53,8 +53,7 @@ python ReverseORCSolver/hierarchical_flow_around_pattern.py
 Pass the width and height as positional arguments:
 
 ```bash
-python ReverseORCSolver/hierarchical_teaser_example.py 1046 760
-python ReverseORCSolver/hierarchical_video_example.py 400 640
+python ReverseORCSolver/hierarchical_teaser_example.py 640 480
 ```
 
 If dimensions are omitted, each example uses its original default size. The
@@ -66,7 +65,7 @@ Use `--headless` to skip the GUI and print the solving time and every resulting
 group/widget box:
 
 ```bash
-python ReverseORCSolver/hierarchical_teaser_example.py 1046 760 --headless
+python ReverseORCSolver/hierarchical_teaser_example.py 640 480 --headless
 ```
 
 Example output:
@@ -87,7 +86,7 @@ Use `--time-only` for benchmarking. It opens no window and prints one numeric
 line containing only the solver time in seconds:
 
 ```bash
-python ReverseORCSolver/hierarchical_teaser_example.py 1046 760 --time-only
+python ReverseORCSolver/hierarchical_teaser_example.py 640 480 --time-only
 ```
 
 Example output:
@@ -130,8 +129,8 @@ The C++ launchers support the same optional dimensions, `--headless`, and
 `--time-only` modes:
 
 ```bash
-python hierarchical_teaser_example.py 1046 760 --headless
-python hierarchical_teaser_example.py 1046 760 --time-only
+python hierarchical_teaser_example.py 640 480 --headless
+python hierarchical_teaser_example.py 640 480 --time-only
 ```
 
 The C++ `--time-only` value is measured with
@@ -143,14 +142,12 @@ teaser it is the sum of both native orientation solves.
 Use the native solver directly from Python with:
 
 ```python
-from hierarchical_solver_cpp import Group, HierarchicalSolver, Size, Widget
+from hierarchical_patterns import teaser_layout
+from hierarchical_solver_cpp import HierarchicalSolver
 
-root = Group(
-    "canvas",
-    [Widget("button", Size(40, 80, 120), Size(40, 60, 80))],
-)
-result = HierarchicalSolver().solve(root, width=500, height=180)
-print(result.boxes["button"])
+root = teaser_layout("column")
+result = HierarchicalSolver().solve(root, width=640, height=480)
+print(result.boxes["CHI2020"])
 ```
 
 See the [C++ solver README](ReverseORCSolver_C++/README.md) for implementation,
@@ -162,25 +159,25 @@ The original runnable examples support the same positional size arguments and
 output modes:
 
 ```bash
-python ORCSolver/teaser_example.py 640 480
-python ORCSolver/video_example.py 400 640
-python ORCSolver/simple_flow_pattern.py 640 320
-python ORCSolver/connected_flow_pattern.py 640 240
-python ORCSolver/optional_widgets_pattern.py 800 800
-python ORCSolver/balanced_flow_pattern.py 240 500
-python ORCSolver/flow_around_pattern.py 600 600
+python ORCSolver/teaser_example.py 
+python ORCSolver/video_example.py 
+python ORCSolver/simple_flow_pattern.py 
+python ORCSolver/connected_flow_pattern.py 
+python ORCSolver/optional_widgets_pattern.py 
+python ORCSolver/balanced_flow_pattern.py 
+python ORCSolver/flow_around_pattern.py 
 ```
 
 Run an original example without Tk windows and print its time and result:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --headless
+python ORCSolver/teaser_example.py 640 480 --headless
 ```
 
 Print only its solver time as one numeric line:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --time-only
+python ORCSolver/teaser_example.py 640 480 --time-only
 ```
 
 These options apply to runnable example and pattern files. The original solver
@@ -213,29 +210,14 @@ cd ReverseORCSolver
 ```
 
 ```python
-from hierarchical_solver import Group, HierarchicalSolver, Size, Widget
+from hierarchical_patterns import teaser_layout
+from hierarchical_solver import HierarchicalSolver
 
-first_toolbar = Group(
-    "group_1",
-    [Widget(f"widget_{i}", Size(40, 80, 120), Size(40, 60, 80))
-     for i in range(1, 6)],
-    direction="horizontal_flow",
-    gap=8,
-)
+dom = teaser_layout("column")
+result = HierarchicalSolver().solve(dom, width=640, height=480)
 
-second_toolbar = Group(
-    "group_2",
-    [Widget(f"widget_{i}", Size(40, 80, 120), Size(40, 60, 80))
-     for i in range(6, 11)],
-    direction="horizontal_flow",
-    gap=8,
-)
-
-dom = Group("canvas", [first_toolbar, second_toolbar], direction="column")
-result = HierarchicalSolver().solve(dom, width=500, height=180)
-
-print(result.boxes["group_1"])
-print(result.boxes["widget_1"])
+print(result.boxes["HF1"])
+print(result.boxes["CHI2020"])
 ```
 
 Existing `ORCWidget` instances can be adapted with:

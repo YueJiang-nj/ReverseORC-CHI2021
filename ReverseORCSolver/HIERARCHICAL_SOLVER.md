@@ -13,25 +13,14 @@ space given to groups, so independently solving toolbars does not mean choosing
 their sizes independently.
 
 ```python
-from hierarchical_solver import Group, HierarchicalSolver, Size, Widget
+from hierarchical_patterns import teaser_layout
+from hierarchical_solver import HierarchicalSolver
 
-def toolbar(name, first):
-    items = [
-        Widget(f"widget_{i}", Size(40, 80, 120), Size(40, 60, 80))
-        for i in range(first, first + 5)
-    ]
-    return Group(name, items, direction="horizontal_flow", gap=8)
+dom = teaser_layout("column")
+result = HierarchicalSolver().solve(dom, width=640, height=480)
 
-dom = Group(
-    "canvas",
-    [toolbar("group_1", 1), toolbar("group_2", 6)],
-    direction="column",
-    gap=12,
-)
-result = HierarchicalSolver().solve(dom, width=500, height=180)
-
-print(result.boxes["group_1"])
-print(result.boxes["widget_1"])
+print(result.boxes["HF1"])
+print(result.boxes["CHI2020"])
 ```
 
 Existing `ORCWidget` objects can be reused:
@@ -80,8 +69,8 @@ Each launcher also accepts optional width and height arguments. Use
 print only the solver time:
 
 ```shell
-python hierarchical_teaser_example.py 1046 760 --headless
-python hierarchical_teaser_example.py 1046 760 --time-only
+python hierarchical_teaser_example.py 640 480 --headless
+python hierarchical_teaser_example.py 640 480 --time-only
 ```
 
 ## Tests

@@ -30,24 +30,18 @@ No CVXPY, NumPy, or pybind11 dependency is required.
 ## Use from Python
 
 ```python
-from hierarchical_solver_cpp import Group, HierarchicalSolver, Size, Widget
+from hierarchical_patterns import teaser_layout
+from hierarchical_solver_cpp import HierarchicalSolver
 
-toolbar = Group(
-    "toolbar",
-    [Widget(f"button_{i}", Size(40, 80, 120), Size(40, 60, 80))
-     for i in range(5)],
-    direction="horizontal_flow",
-    gap=8,
-)
-root = Group("canvas", [toolbar], direction="column")
-result = HierarchicalSolver().solve(root, width=500, height=180)
-print(result.boxes["button_0"])
+root = teaser_layout("column")
+result = HierarchicalSolver().solve(root, width=640, height=480)
+print(result.boxes["CHI2020"])
 ```
 
 Run the complete example and tests:
 
 ```bash
-python example.py
+python hierarchical_teaser_example.py 640 480 --headless
 python -m unittest -v
 ```
 
@@ -70,15 +64,15 @@ python hierarchical_flow_around_pattern.py
 Every launcher accepts optional width and height arguments:
 
 ```bash
-python hierarchical_teaser_example.py 1046 760
+python hierarchical_teaser_example.py 640 480
 ```
 
 Use `--headless` to print native solver results without opening windows, or
 `--time-only` to print one numeric timing value:
 
 ```bash
-python hierarchical_teaser_example.py 1046 760 --headless
-python hierarchical_teaser_example.py 1046 760 --time-only
+python hierarchical_teaser_example.py 640 480 --headless
+python hierarchical_teaser_example.py 640 480 --time-only
 ```
 
 The reported time is measured with `std::chrono::steady_clock` immediately

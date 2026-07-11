@@ -64,14 +64,14 @@ Use `--headless` to open no windows and print solving time, loss, and result
 variables:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --headless
+python ORCSolver/teaser_example.py 640 480 --headless
 ```
 
 Use `--time-only` to open no windows and print one numeric line containing only
 the solver time in seconds:
 
 ```bash
-python ORCSolver/video_example.py 890 365 --time-only
+python ORCSolver/teaser_example.py 640 480 --time-only
 ```
 
 `--headless` and `--time-only` are mutually exclusive.
