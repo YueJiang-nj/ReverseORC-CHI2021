@@ -3,35 +3,44 @@
 This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
 
-Paper:
+## Publication
 
-ReverseORC: Reverse Engineering of Resizable User Interface Layouts with OR-Constraints
+### ReverseORC: Reverse Engineering of Resizable User Interface Layouts with OR-Constraints
 
-Yue Jiang, Wolfgang Stuerzlinger, Christof Lutteroth
+[Yue Jiang](https://yuejiang-nj.github.io/) ·
+[Wolfgang Stuerzlinger](https://www.sfu.ca/siat/people/research-faculty/wolfgang-stuerzlinger.html) ·
+[Christof Lutteroth](https://people.bath.ac.uk/cl2073/)
 
-Paper: https://yuejiang-nj.github.io/Publications/2021CHI_ReverseORC/paper.pdf
+ACM CHI Conference on Human Factors in Computing Systems, 2021
 
-Video: https://www.youtube.com/watch?v=uBVRtUvLFSk
+[Paper](https://yuejiang-nj.github.io/Publications/2021CHI_ReverseORC/paper.pdf) ·
+[Video](https://www.youtube.com/watch?v=uBVRtUvLFSk)
 
+## Related publications
 
-Related Papers: 
+### ORCSolver: An Efficient Solver for Adaptive GUI Layout with OR-Constraints
 
-ORCSolver: An Efficient Solver for Adaptive GUI Layout with OR-Constraints
+[Yue Jiang](https://yuejiang-nj.github.io/) ·
+[Wolfgang Stuerzlinger](https://www.sfu.ca/siat/people/research-faculty/wolfgang-stuerzlinger.html) ·
+[Matthias Zwicker](https://www.cs.umd.edu/~zwicker/) ·
+[Christof Lutteroth](https://people.bath.ac.uk/cl2073/)
 
-Yue Jiang, Wolfgang Stuerzlinger, Matthias Zwicker, Christof Lutteroth
-Paper: https://yuejiang-nj.github.io/Publications/2020CHI_ORCSolver/paper.pdf
+ACM CHI Conference on Human Factors in Computing Systems, 2020
 
-Video: https://www.youtube.com/watch?v=5SAZ8iDKFhc
+[Paper](https://yuejiang-nj.github.io/Publications/2020CHI_ORCSolver/paper.pdf) ·
+[Video](https://www.youtube.com/watch?v=5SAZ8iDKFhc)
 
-ORC Layout: Adaptive GUI Layout with OR-Constraints
+### ORC Layout: Adaptive GUI Layout with OR-Constraints
 
-Yue Jiang, Ruofei Du, Christof Lutteroth, Wolfgang Stuerzlinger
+[Yue Jiang](https://yuejiang-nj.github.io/) ·
+[Ruofei Du](https://ruofeidu.com/) ·
+[Christof Lutteroth](https://people.bath.ac.uk/cl2073/) ·
+[Wolfgang Stuerzlinger](https://www.sfu.ca/siat/people/research-faculty/wolfgang-stuerzlinger.html)
 
-Paper: https://yuejiang-nj.github.io/Publications/2019CHI_ORCLayout/paper.pdf
+ACM CHI Conference on Human Factors in Computing Systems, 2019
 
-Video: https://www.youtube.com/watch?v=eiEmLTfPDZQ&feature=youtu.be
-
-
+[Paper](https://yuejiang-nj.github.io/Publications/2019CHI_ORCLayout/paper.pdf) ·
+[Video](https://www.youtube.com/watch?v=eiEmLTfPDZQ)
 
 The repository is organized into four directories:
 
