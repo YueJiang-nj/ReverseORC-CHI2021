@@ -14,7 +14,8 @@ This repository contains the hierarchical ReverseORC GUI layout solver for DOM-l
 ACM CHI Conference on Human Factors in Computing Systems, 2021
 
 [Paper](https://yuejiang-nj.github.io/Publications/2021CHI_ReverseORC/paper.pdf) ·
-[Video](https://www.youtube.com/watch?v=uBVRtUvLFSk)
+[Video](https://www.youtube.com/watch?v=uBVRtUvLFSk) ·
+[BibTeX](https://dblp.org/rec/conf/chi/0002SL21.bib)
 
 ## Related publications
 
@@ -28,7 +29,8 @@ ACM CHI Conference on Human Factors in Computing Systems, 2021
 ACM CHI Conference on Human Factors in Computing Systems, 2020
 
 [Paper](https://yuejiang-nj.github.io/Publications/2020CHI_ORCSolver/paper.pdf) ·
-[Video](https://www.youtube.com/watch?v=5SAZ8iDKFhc)
+[Video](https://www.youtube.com/watch?v=5SAZ8iDKFhc) ·
+[BibTeX](https://dblp.org/rec/conf/chi/0002SZL20.bib)
 
 ### ORC Layout: Adaptive GUI Layout with OR-Constraints
 
@@ -40,7 +42,8 @@ ACM CHI Conference on Human Factors in Computing Systems, 2020
 ACM CHI Conference on Human Factors in Computing Systems, 2019
 
 [Paper](https://yuejiang-nj.github.io/Publications/2019CHI_ORCLayout/paper.pdf) ·
-[Video](https://www.youtube.com/watch?v=eiEmLTfPDZQ)
+[Video](https://www.youtube.com/watch?v=eiEmLTfPDZQ) ·
+[BibTeX](https://dblp.org/rec/conf/chi/JiangDLS19.bib)
 
 The repository is organized into four directories:
 
