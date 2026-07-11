@@ -1,15 +1,11 @@
 # ReverseORC-CHI2021
 
-This repository contains the original ReverseORC layout solver and a
-hierarchical solver for DOM-like widget trees. The hierarchical solver measures
-groups bottom-up and places them top-down, solving only siblings together. This
-keeps local solve sizes small while parent groups continue to coordinate the
-space assigned to their children.
+This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
 ## Requirements
 
 The examples use Python, Tkinter, Pillow, CVXPY, and NumPy. Image assets are
-loaded from the sibling `images` directory:
+loaded from the `images` directory:
 
 ```text
 parent-directory/
@@ -31,27 +27,6 @@ python hierarchical_balanced_flow_pattern.py
 python hierarchical_flow_around_pattern.py
 ```
 
-By default, an example opens a resizable Tkinter window. Resizing the window
-automatically solves the hierarchy again and redraws the result using the same
-Pillow `Image` and `ImageTk` assets as the corresponding original example.
-Every hierarchical launcher follows the teaser presentation: an exact-size
-`Canvas Layout` window and a separate `Time` window. The time field reports only
-solver execution and updates after each resize.
-
-The teaser preserves the original responsive pivot behavior and semantic
-groups. For example:
-
-- CHI2019 and CHI2020 always occupy equal-size boxes.
-- Message and Email occupy equal-size boxes.
-- Send and Clear occupy equal-size boxes.
-- The two text-entry areas occupy equal-size boxes.
-- `Message | entry | Send` and `Email | entry | Clear` remain separate rows.
-
-The same peer-element rule is applied to the other hierarchical patterns:
-repeated buttons in a toolbar use uniform cells, balanced flows distribute
-peers evenly between lines, the two video logos have equal boxes, and all fruit
-widgets in the flow-around example use the same cell size. Elements with
-different semantic roles may still use different preferred sizes.
 
 ## Choosing the window size
 
@@ -103,6 +78,39 @@ Example output:
 
 `--headless` and `--time-only` are mutually exclusive and are available on all
 hierarchical example scripts.
+
+## Original non-hierarchical examples
+
+The original runnable examples support the same positional size arguments and
+output modes:
+
+```bash
+python ORCSolver/teaser_example.py 640 480
+python ORCSolver/video_example.py 400 640
+python ORCSolver/simple_flow_pattern.py 640 320
+python ORCSolver/connected_flow_pattern.py 640 240
+python ORCSolver/optional_widgets_pattern.py 800 800
+python ORCSolver/balanced_flow_pattern.py 240 500
+python ORCSolver/flow_around_pattern.py 600 600
+```
+
+Run an original example without Tk windows and print its time and result:
+
+```bash
+python ORCSolver/video_example.py 890 365 --headless
+```
+
+Print only its solver time as one numeric line:
+
+```bash
+python ORCSolver/video_example.py 890 365 --time-only
+```
+
+These options apply to runnable example and pattern files. The original solver
+is isolated in `ORCSolver/`. Library modules such as
+`ORCSolver/flow_solver.py`, `ORCSolver/orclayout_classes.py`,
+`hierarchical_solver.py`, and `ORCSolver/legacy_cli.py` are imported APIs and
+therefore do not expose example CLI options.
 
 ## Timing definition
 
