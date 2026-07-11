@@ -284,8 +284,6 @@ def teaser_asset(name):
 
 
 class PatternWindow:
-    COLORS = ("#70a1ff", "#7bed9f", "#ffa502", "#ff6b81", "#a29bfe", "#81ecec")
-
     def __init__(self, scenario, width=None, height=None):
         self.scenario = scenario
         title, self.layout, default_width, default_height = SCENARIOS[scenario]()
@@ -293,7 +291,7 @@ class PatternWindow:
         height = default_height if height is None else height
         self.root = tk.Tk()
         self.root.title("Canvas Layout")
-        self.canvas = tk.Canvas(self.root, background="#f5f6fa", highlightthickness=0)
+        self.canvas = tk.Canvas(self.root, background="#ffffff", highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
         # Every pattern follows the original teaser UI: an exact-size canvas
         # plus a separate timing window. Toplevel keeps both windows in the
@@ -352,16 +350,8 @@ class PatternWindow:
                     self.canvas.create_text(box.left + 3, box.top + 3, text=name,
                                             anchor="nw", fill="#2f3542", font=("TkDefaultFont", 8))
                 continue
-            if self.scenario == "teaser":
-                color = {
-                    "message": "#ff6b81", "email": "#ff6b81",
-                    "blank1": "#a29bfe", "blank2": "#a29bfe",
-                    "send": "#81ecec", "clear": "#81ecec",
-                }.get(name, self.COLORS[index % len(self.COLORS)])
-            else:
-                color = self.COLORS[index % len(self.COLORS)]
             self.canvas.create_rectangle(box.left + 1, box.top + 1, box.right - 1, box.bottom - 1,
-                                         fill=color, outline="#2f3542")
+                                         fill="#ffffff", outline="#2f3542")
             asset = pattern_asset(self.scenario, name)
             if asset is not None:
                 self._draw_image(name, box, asset)
