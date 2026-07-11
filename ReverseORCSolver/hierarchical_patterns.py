@@ -344,19 +344,10 @@ class PatternWindow:
         groups = {node.name for node in walk(self.layout) if isinstance(node, Group)}
         for index, (name, box) in enumerate(result.boxes.items()):
             if name in groups:
-                if name != "canvas":
-                    self.canvas.create_rectangle(box.left, box.top, box.right, box.bottom,
-                                                 outline="#57606f", dash=(3, 2))
                 continue
-            self.canvas.create_rectangle(box.left + 1, box.top + 1, box.right - 1, box.bottom - 1,
-                                         fill="#ffffff", outline="#2f3542")
             asset = pattern_asset(self.scenario, name)
             if asset is not None:
                 self._draw_image(name, box, asset)
-        if self.scenario == "teaser" and "email_row" in result.boxes:
-            row = result.boxes["email_row"]
-            self.canvas.create_line(row.left, row.top, row.right, row.top,
-                                    fill="#2f3542", width=3)
         self.time_result.delete(0, tk.END)
         self.time_result.insert(0, "%.6f" % solve_seconds)
 
