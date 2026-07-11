@@ -2,13 +2,14 @@
 
 This repository contains the hierarchical ReverseORC GUI layout solver for DOM-like widget trees. The hierarchical solver measures groups bottom-up and places them top-down, solving only siblings together. This keeps local solve sizes small while parent groups continue to coordinate the space assigned to their children.
 
-The repository is organized into three directories:
+The repository is organized into four directories:
 
 ```text
 ReverseORC_CHI2021/
 ├── images/
 ├── ORCSolver/          # Original non-hierarchical solver (ORCSolver)
-└── ReverseORCSolver/   # New hierarchical solver
+├── ReverseORCSolver/   # Hierarchical Python solver
+└── ReverseORCSolver_C++/ # Hierarchical C++ solver with a Python API
 ```
 
 ## Requirements
@@ -28,7 +29,8 @@ operating-system package manager. Image assets are loaded from `images/`:
 ReverseORC_CHI2021/
 ├── images/
 ├── ORCSolver/
-└── ReverseORCSolver/
+├── ReverseORCSolver/
+└── ReverseORCSolver_C++/
 ```
 
 ## Hierarchical examples
@@ -96,6 +98,63 @@ Example output:
 
 `--headless` and `--time-only` are mutually exclusive and are available on all
 hierarchical example scripts.
+
+## C++ hierarchical solver
+
+`ReverseORCSolver_C++` implements the same hierarchical algorithm in C++17 and
+exposes it to Python through a CPython extension. Layouts are still defined in
+Python, while intrinsic measurement, flow wrapping, weighted allocation, box
+placement, and objective calculation execute in C++.
+
+The native version requires a C++17 compiler, Python development headers, and
+setuptools. Build it from the repository root with:
+
+```bash
+cd ReverseORCSolver_C++
+python setup.py build_ext --inplace
+```
+
+After building, run the same seven patterns:
+
+```bash
+python hierarchical_teaser_example.py
+python hierarchical_video_example.py
+python hierarchical_simple_flow_pattern.py
+python hierarchical_connected_flow_pattern.py
+python hierarchical_optional_widgets_pattern.py
+python hierarchical_balanced_flow_pattern.py
+python hierarchical_flow_around_pattern.py
+```
+
+The C++ launchers support the same optional dimensions, `--headless`, and
+`--time-only` modes:
+
+```bash
+python hierarchical_teaser_example.py 1046 760 --headless
+python hierarchical_teaser_example.py 1046 760 --time-only
+```
+
+The C++ `--time-only` value is measured with
+`std::chrono::steady_clock` directly around the native `Solver::solve()` call.
+It excludes Python serialization, conversion into C++ nodes, conversion of
+results back to Python, GUI work, rendering, and output formatting. For the
+teaser it is the sum of both native orientation solves.
+
+Use the native solver directly from Python with:
+
+```python
+from hierarchical_solver_cpp import Group, HierarchicalSolver, Size, Widget
+
+root = Group(
+    "canvas",
+    [Widget("button", Size(40, 80, 120), Size(40, 60, 80))],
+)
+result = HierarchicalSolver().solve(root, width=500, height=180)
+print(result.boxes["button"])
+```
+
+See the [C++ solver README](ReverseORCSolver_C++/README.md) for implementation,
+build, and API details.
 
 ## Original non-hierarchical examples
 
@@ -195,6 +254,14 @@ From the repository root, run both test suites with:
 ```bash
 python -m unittest discover -s ORCSolver -v
 python -m unittest discover -s ReverseORCSolver -v
+```
+
+Build and test the C++ version with:
+
+```bash
+cd ReverseORCSolver_C++
+python setup.py build_ext --inplace
+python -m unittest -v
 ```
 
 The tests cover hierarchical containment, weighted allocation, flow wrapping,
